@@ -51,7 +51,7 @@ object ID to the string.  it should look like this "/public/track/5fc990a81d41c8
 12. Go to localhost:3000  click on the music link and your song should start playing. If not click on the pause button.
 If the title of the file is displaying /public/track/5fc990a81d41c883f3b4d7a1  then you can go into the code in music.html and edit this code to add the right title
   
-  if (currentSong == 0)
+  	if (currentSong == 0)
 		{
 
 			songTitle.textContent = "song1";
@@ -66,7 +66,7 @@ If the title of the file is displaying /public/track/5fc990a81d41c883f3b4d7a1  t
 		}
 		
     
-    I didnt have the time to figure out how to read the file name properly and not the string from the array. So this was a quick fix
+  I didnt have the time to figure out how to read the file name properly and not the string from the array. So this was a quick fix
 
 
  Go to the command terminal in linux and folder path of Mysite/ and type in node app.js.  The web server should start and connect to the mongodb.
