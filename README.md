@@ -24,7 +24,7 @@ const Grid = require('gridfs-stream');
 index.html and music.html is mine
 
 musicplayer.html is somebody's code to test a musicplayer on a single page alone
-
+https://github.com/DaftCreation/Custom-Audio-Player
 
 
 This is a website I have created for my own personal music producer/dj career.  For an app, I created a music player that can stream music through the mongodb using Gridfs.  This was a very intricate project as a beginner. To fully understand express, mongodb, gridfs and to use it was a challenge.  In the readme I will walk through how I got everything up and running and the commands used to upload the files and utilize the database.
