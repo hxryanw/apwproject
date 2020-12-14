@@ -1,0 +1,162 @@
+<html>
+<head>
+	<script type="text/javascript" src="script.js"></script>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+<link href="stylesheets/Main.css" rel="stylesheet"/>
+</head>
+
+	
+<div class="menu">
+	<a href="index.html" class"link" onclick="set_text();">Home</a>
+	<a href="" class"link">Merch</a>
+	<a href="music.html" class"link">Music</a>
+	<a href="" class"link">Tour</a>
+	<a href="" class"link">Contact</a>
+	</div>	
+
+	<form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="custom-file mb-3">
+          <input type="file" name="file" id="file" class="custom-file-input">
+          <label for="file" class="custom-file-label">Choose File</label>
+        </div>
+     <input type="submit" value="Submit" class="btn btn-primary btn-block">
+</form>
+
+<!-- form(action="upload/method=post etc")-->
+
+<video id="bgVideo" muted="muted" autoplay="autoplay" loop="loop" >
+  <source src="images/background.mp4" type="video/mp4">
+</video>
+
+<div id="main">
+	<div id="player">
+		<div id="songTitle">Demo</div>
+		<div id="buttons">
+			<button id="pre" onclick="pre()"><img src="images/Pre.png" height="90%" width="90%"/></button>
+			<button id="play" onclick="playOrPauseSong()"><img src="images/Pause.png"/></button>
+			<button id="next" onclick="next()"><img src="images/Next.png" height="90%" width="90%"/></button>
+		</div>
+		
+		<div id="seek-bar">
+			<div id="fill"></div>
+			<div id="handle"></div>
+		</div>
+	</div>
+</div>
+	
+
+
+<script type="text/javascript">
+	
+	//the code here is not mine. It was a quick way for me to learn how to create and set up an audio player without relying on the browser's html5 mp3 player
+	//I found this code through a youtube tutorial and the guys github.  https://github.com/DaftCreation/Custom-Audio-Player
+
+	var songs = ["/public/tracks/5fc990a81d41c883f3b4d7a1","/public/tracks/5fd6e7ed1d41c81c9f6eec16","/public/tracks/5fd6e7e31d41c81c81c8f476"];
+
+
+	
+	var songTitle = document.getElementById("songTitle");
+	var fillBar = document.getElementById("fill");
+	
+	var song = new Audio();
+	var currentSong = 0;    // it point to the current song
+	
+	window.onload = playSong;   // it will call the function playSong when window is load
+	
+	function playSong(){
+		
+		song.src = songs[currentSong];  //set the source of 0th song 
+		
+		//songTitle.textContent = songs[currentSong]; // set the title of song
+
+		//I made this code so the songTitle document.GetelementID replaces the folder string output.
+		if (currentSong == 0)
+		{
+
+			songTitle.textContent = "Where Have you been remix";
+		}
+		if (currentSong == 1)
+		{
+			songTitle.textContent = "Joel Corry - Sorry remix";
+		}
+		if (currentSong == 2)
+		{
+			songTitle.textContent = "Dua Lipa - Dont start now remix";
+		}
+		
+		
+		song.play();    // play the song
+	}
+	
+	function playOrPauseSong(){
+		
+		if(song.paused){
+			song.play();
+			$("#play img").attr("src","images/Pause.png");
+		}
+		else{
+			song.pause();
+			$("#play img").attr("src","images/Play.png");
+		}
+	}
+	
+	song.addEventListener('timeupdate',function(){ 
+		
+		var position = song.currentTime / song.duration;
+		
+		fillBar.style.width = position * 100 +'%';
+	});
+	
+
+	function next(){
+		
+		currentSong++;
+		if(currentSong > 2){
+			currentSong = 0;
+		}
+		playSong();
+		$("#play img").attr("src","images/Pause.png");
+		
+	}
+
+	function pre(){
+		
+		currentSong--;
+		if(currentSong < 0){
+			currentSong = 2;
+		}
+		playSong();
+		$("#play img").attr("src","images/Pause.png");
+	
+	}
+</script>
+
+
+
+
+
+
+<body class="html,body">
+
+
+	
+<footer class="footer1">
+	<div class="social-container">
+	
+	<a href="www.facebook.com" id= "facebook" class="social-icons">  <img src="images/socials/facebook.png"></a>
+	<a href="twitter.com/hxploitmusic" id= "twitter" class="social-icons"> <img src="images/socials/twitter.png"></a> 
+	<a href="www.instgram.com/hxploit" id= "instagram" class="social-icons"> <img src="images/socials/instagram.png"></a>
+	<a href="www.youtube.com" id= "youtube" class="social-icons"> <img src="images/socials/youtube.png"></a>
+		
+	</div>
+</footer>	
+	
+
+</body>
+	
+
+	
+	
+</html>

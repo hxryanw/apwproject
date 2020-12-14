@@ -1,0 +1,104 @@
+<html>
+    <head>
+        <link href="stylesheets/Main.css" rel="stylesheet"/>
+
+    </head>
+    <body>
+        <div id="bg">
+            <div id="blackLayer"></div>
+            <img src="images/Poster1.jpg"/>
+        </div>
+       
+        <div id="main">
+            <div id="image">
+                <img src="images/Poster1.jpg"/>
+            </div>
+            <div id="player">
+                <div id="songTitle">Demo</div>
+                <div id="buttons">
+                    <button id="pre" onclick="pre()"><img src="images/Pre.png" height="90%" width="90%"/></button>
+                    <button id="play" onclick="playOrPauseSong()"><img src="images/Pause.png"/></button>
+                    <button id="next" onclick="next()"><img src="images/Next.png" height="90%" width="90%"/></button>
+                </div>
+                
+                <div id="seek-bar">
+                    <div id="fill"></div>
+                    <div id="handle"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+    
+        var songs = ["/public/tracks/5fc990a81d41c883f3b4d7a1","Song2.mp3","Song3.mp3"];
+
+        //songs[0] = "Where Have you Been - Rihanna (Folker's Remix)";
+        var poster = ["Poster1.jpg","Poster2.jpg","Poster3.jpg"];
+        
+        var songTitle = document.getElementById("songTitle");
+        var fillBar = document.getElementById("fill");
+        
+        var song = new Audio();
+        var currentSong = 0;    // it point to the current song
+        
+        window.onload = playSong;   // it will call the function playSong when window is load
+        
+        function playSong(){
+            
+            song.src = songs[currentSong];  //set the source of 0th song 
+            
+            //songTitle.textContent = songs[currentSong]; // set the title of song
+
+            if (currentSong == 0)
+            {
+
+                songTitle.textContent = "Where Have you been remix";
+            }
+            
+            song.play();    // play the song
+        }
+        
+        function playOrPauseSong(){
+            
+            if(song.paused){
+                song.play();
+                $("#play img").attr("src","images/Pause.png");
+            }
+            else{
+                song.pause();
+                $("#play img").attr("src","images/Play.png");
+            }
+        }
+        
+        song.addEventListener('timeupdate',function(){ 
+            
+            var position = song.currentTime / song.duration;
+            
+            fillBar.style.width = position * 100 +'%';
+        });
+        
+    
+        function next(){
+            
+            currentSong++;
+            if(currentSong > 2){
+                currentSong = 0;
+            }
+            playSong();
+            $("#play img").attr("src","images/Pause.png");
+            $("#image img").attr("src",poster[currentSong]);
+            $("#bg img").attr("src",poster[currentSong]);
+        }
+    
+        function pre(){
+            
+            currentSong--;
+            if(currentSong < 0){
+                currentSong = 2;
+            }
+            playSong();
+            $("#play img").attr("src","images/Pause.png");
+            $("#image img").attr("src",poster[currentSong]);
+            $("#bg img").attr("src",poster[currentSong]);
+        }
+    </script>
